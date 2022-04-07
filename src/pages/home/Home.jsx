@@ -5,6 +5,7 @@ import './home.scss'
 import Widget from '../../components/Widgets/Widget'
 import Featured from '../../components/featured/Featured'
 import Charts from '../../components/charts/Charts'
+import Table from '../../components/table/Table'
 
 function Home() {
   return (
@@ -21,6 +22,12 @@ function Home() {
         <div className="charts">
           <Featured/>
           <Charts/>
+        </div>
+        <div className="listContainer">
+        <div className="listContainer">
+          Latest Transcations
+        </div>
+        <Table/>
         </div>
       </div>
     </div>
