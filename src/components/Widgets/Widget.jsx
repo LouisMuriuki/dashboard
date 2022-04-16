@@ -83,7 +83,7 @@ function Widget({ type }) {
       <div className="right">
         <div className='percentage positive'>
           <KeyboardArrowUpIcon />
-         {diff}
+         {diff} %
         </div>
         {data.icon}
       </div>

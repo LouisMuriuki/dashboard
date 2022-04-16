@@ -10,7 +10,7 @@ import Table from '../../components/table/Table'
 function Home() {
   return (
     <div className='home'>
-      <Sidebar />
+      <Sidebar/>
       <div className="homecontainer">
         <Navbar />
         <div className="widgets">

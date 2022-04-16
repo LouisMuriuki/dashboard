@@ -6,7 +6,14 @@ import './new.scss'
 
 function New({ inputs, title }) {
 
-  const [file,setFile]=useState("")
+  const [file, setFile] = useState("");
+
+  console.log(file)
+
+  const onChange = (e) => {
+    setFile(e.target.files[0])
+  }
+
   return (
     <div className="New">
       <Sidebar />
@@ -17,18 +24,18 @@ function New({ inputs, title }) {
         </div>
         <div className="bottom">
           <div className="left">
-            <img className="img" 
-            src={
-              file? URL.createObjectURl(file)
-              : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"}
-               alt="" 
-               />
+            <img className="img"
+              src={
+                file ? URL.createObjectURL(file)
+                  : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"}
+              alt=""
+            />
           </div>
           <div className="right">
             <form>
               <div className="formInput">
                 <label htmlFor='file'>Add Image:<DriveFolderUploadOutlinedIcon className="icon" /></label>
-                <input type="file" id="file" onChange={e=>{setFile(e.target.files[0])}} style={{ display: "none" }} />
+                <input type="file" id="file" onChange={onChange} style={{ display: "none" }} />
               </div>
               {inputs.map((input) => {
                 return (
