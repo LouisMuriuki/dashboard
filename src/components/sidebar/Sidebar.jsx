@@ -19,7 +19,7 @@ function Sidebar() {
     <div className='sidebar'>
         <div className="top">
             <Link to="/" style={{textDecoration:"none"}}>
-            <span className="logo">Kinglui</span>
+            <span className="logo">Welcome, <i>Admin</i></span>
             </Link>
         </div>
         <hr/>

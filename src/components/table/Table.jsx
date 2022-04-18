@@ -78,7 +78,7 @@ function List() {
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.id}>
-              <TableCell >
+              <TableCell class="id">
                 {row.id}
               </TableCell>
               <TableCell className="tableCell">
