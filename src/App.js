@@ -8,16 +8,17 @@ import "./style/dark.scss"
 import { userInputs, productInputs } from "./formSource";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
+import { AuthContext } from "./context/AuthContext";
 
 
 function App() {
  const {darkMode}=useContext(DarkModeContext)
- const user=false
+ const {currentUser}=useContext(AuthContext)
 
  const RequireAuth=({children})=>{
-return user? children :<Navigate to= "/login"/>
+return currentUser? children :<Navigate to= "/login"/>
 
- }
+ } 
 
   return (
       <div className={darkMode ? "app dark-mode":"app"} style={{padding:"0",margin:"0"}}>
