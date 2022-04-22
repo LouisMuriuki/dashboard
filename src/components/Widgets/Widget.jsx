@@ -1,15 +1,18 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './widget.scss'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import { collection, query, where, getDocs } from "firebase/firestore";
+import {db} from "../../firebase"
 function Widget({ type }) {
+  const [amount,setAmount]=useState(null)
+  const [diff,setDiff]=useState(null)
   let data;
-  //temp
-  const amount=100
-  const diff=20
+
+
   switch (type) {
     case "user":
       data = {
@@ -70,6 +73,26 @@ function Widget({ type }) {
       default:
         break;  
   }
+  useEffect(()=>{
+    const fetch=async()=>{
+      const today=new Date()
+      const lastMonth=new Date(new Date().setMonth(today.getMonth()-1))
+      const prevMonth= new Date(new Date().setMonth(today.getMonth()-2))
+
+      const userRef = collection(db, "users");
+
+const lastMonthQuery = query(userRef, where("timeStamp", "<=", today), where("timeStamp", ">",lastMonth));
+
+const prevMonthQuery = query(userRef, where("timeStamp", "<=", lastMonth), where("timeStamp", ">",prevMonth));
+
+      const lastMonthData=await getDocs(lastMonthQuery)
+      const prevMonthData=await getDocs(prevMonthQuery)
+
+      setAmount(lastMonthData.docs.length)
+      setDiff((lastMonthData.docs.length-prevMonthData.docs.length)/(prevMonthData.docs.length)*100)
+    }
+    fetch()
+  })
 
   return (
     <div className='widget'>
