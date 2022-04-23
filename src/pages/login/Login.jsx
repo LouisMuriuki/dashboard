@@ -42,6 +42,7 @@ function Login() {
   }
   return (
     <div className="login">
+      <h2>Welcome to the Dashboard <br/> Enter your Credentials to log in</h2>
       <form onSubmit={handleLogin}>
         <input type="email" placeholder="email" value={email} onChange={e => setEmail(e.target.value)} />
         <input type="password" placeholder="password" value={password} onChange={e => setPassword(e.target.value)} />

@@ -32,13 +32,15 @@
             }
 
             .right {
-                flex: 2;
+                flex: 3;
 
                 form {
                     display: flex;
+                    flex-direction: row;
                     flex-wrap: wrap;
                     gap: 25px;
                     justify-content: space-around;
+                    align-items: center;
 
                     .formInput {
                         width: 40%;
@@ -74,10 +76,15 @@
                         font-weight: bold;
                         cursor: pointer;
                         margin-top: 10px;
+                        height: auto;
+                        &:focus, &:active:focus {
+                            background-color: rgba(0, 128, 128, 0.278);
+                            cursor: not-allowed;
+                        }
 
                         &:disabled {
                             background-color: rgba(3, 93, 92, 0.322);
-                            cursor:not-allowed;
+                            cursor: not-allowed;
                         }
                     }
                 }

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './widget.scss'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
@@ -19,6 +20,7 @@ function Widget({ type }) {
         title: 'USERS',
         isMoney: false,
         link: "see all users",
+        query:"users",
         icon:( <PersonOutlineIcon 
         className="icon"
         style={{
@@ -55,17 +57,17 @@ function Widget({ type }) {
               />)
           }
           break;
-          case "balance":
+          case "product":
             data = {
-              title: 'BALANCE',
-              isMoney: true,
+              title:'PRODUCTS',
+              query:"product",
               link: "see details",
               icon: (<AccountBalanceWalletIcon 
               className="icon" 
               style={{
                 color:"purple",
                 backgroundColor:"rgba(128, 0, 128, 0.2)",
-              }}
+              }} 
               />
               )
             }
@@ -79,7 +81,7 @@ function Widget({ type }) {
       const lastMonth=new Date(new Date().setMonth(today.getMonth()-1))
       const prevMonth= new Date(new Date().setMonth(today.getMonth()-2))
 
-      const userRef = collection(db, "users");
+      const userRef = collection(db, data.query);
 
 const lastMonthQuery = query(userRef, where("timeStamp", "<=", today), where("timeStamp", ">",lastMonth));
 
@@ -104,8 +106,8 @@ const prevMonthQuery = query(userRef, where("timeStamp", "<=", lastMonth), where
         <span className='link'> {data.link} </span>
       </div>
       <div className="right">
-        <div className='percentage positive'>
-          <KeyboardArrowUpIcon />
+        <div className={`percentage ${diff < 0 ? "negative" : "positive"}`}>
+         {diff <0? <KeyboardArrowDownIcon />:<KeyboardArrowUpIcon />} 
          {diff} %
         </div>
         {data.icon}
